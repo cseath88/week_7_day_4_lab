@@ -1,37 +1,27 @@
-import ListItem from "./ListItem"
+const CountrySelect = ({countries, onCountrySelected}) => {
 
-
-
-const CountrySelect = ({countries, onCountrySelected }) => {
-
+    
     const countryItems = countries.map((country, index) => {
-        return <ListItem country={country} key={index} onCountrySelected={onCountrySelected} />
+        return <option value={index} key={index}>{country.name.common}</option>
+        
     })
 
+
     const handleChange = (event) => {
-        console.log(event.target.value);
+        const index = event.target.value
+        const country = countries[index]
+        onCountrySelected(country)
     }
-    
+
 
     return (
-        <div>
-        <ul>
-            <select onChange={handleChange} >
-                
-                {countryItems}
-            </select>
-
-        </ul>
-        </div>
-
-
+        
+        <select onChange={handleChange}>
+            {countryItems}
+        </select>
+        
     )
 }
 
+
 export default CountrySelect
-
-
-{/* <select
-value={selectedFruit} // ...force the select's value to match the state variable...
-onChange={e => setSelectedFruit(e.target.value)} // ... and update the state variable on any change!
-> */}
